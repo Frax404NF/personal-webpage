@@ -1,9 +1,23 @@
-import Image from 'next/image'
+import Nav from './components/Nav'
+import Hero from './components/Hero'
+import Work from './components/Work'
+import Experience from './components/Experience'
+import About from './components/About'
+import Contact from './components/Contact'
+import Footer from './components/Footer'
 
-export default function Home() {
+export default function Page() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between py-32">
-      <h1 className="text-4xl font-bold">Hello, Next.js!</h1>
-    </div>
+    <>
+      <Nav />
+      <main id="main-content">
+        <Hero />
+        <Work />
+        <Experience />
+        <About />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   )
 }
