@@ -22,7 +22,7 @@ export default function About() {
   const { ref: contentRef, inView: contentInView } = useInView()
 
   return (
-    <section id="about" aria-labelledby="about-heading" style={{ padding: '96px 0', fontFamily: 'var(--font-sans)' }}>
+    <section id="about" aria-labelledby="about-heading" style={{ padding: '96px 0' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 2rem' }}>
 
         <div

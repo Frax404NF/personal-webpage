@@ -177,6 +177,7 @@ body {
   display: inline-block;
   opacity: 0;
   animation: char-in 320ms var(--ease-out-expo) both;
+  will-change: opacity, transform;
 }
 
 .hero-eyebrow {
@@ -191,6 +192,7 @@ body {
   flex-wrap: wrap;
   opacity: 0;
   animation: eyebrow-in 400ms var(--ease-out-expo) 500ms both;
+  will-change: opacity, transform;
 }
 
 .hero-eyebrow-sep {
@@ -203,6 +205,7 @@ body {
   transform-origin: left center;
   transform: scaleX(0);
   animation: rule-draw 600ms var(--ease-out-expo) 700ms both;
+  will-change: transform;
 }
 
 .hero-below {
@@ -213,6 +216,7 @@ body {
   padding-top: 1.75rem;
   opacity: 0;
   animation: below-in 400ms var(--ease-out-expo) 900ms both;
+  will-change: opacity;
 }
 
 .hero-bio {
@@ -559,6 +563,10 @@ body {
 }
 .animate-fade-up.in-view {
   animation: fade-up 500ms var(--ease-out-expo) both;
+  will-change: opacity, transform;
+}
+.animate-fade-up.in-view[style*="animation-delay"] {
+  will-change: opacity, transform;
 }
 
 .animate-fade-in {
@@ -566,6 +574,7 @@ body {
 }
 .animate-fade-in.in-view {
   animation: fade-in 400ms var(--ease-out-expo) both;
+  will-change: opacity;
 }
 
 /* Stagger delays for child elements */

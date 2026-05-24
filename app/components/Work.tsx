@@ -80,7 +80,7 @@ export default function Work() {
   const { ref: compactRef, inView: compactInView } = useInView()
 
   return (
-    <section id="work" aria-labelledby="work-heading" style={{ padding: '96px 0', fontFamily: 'var(--font-sans)' }}>
+    <section id="work" aria-labelledby="work-heading" style={{ padding: '96px 0' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 2rem' }}>
 
         <div

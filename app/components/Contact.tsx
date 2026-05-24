@@ -36,7 +36,7 @@ export default function Contact() {
   const { ref, inView } = useInView()
 
   return (
-    <section id="contact" aria-labelledby="contact-heading" style={{ background: 'var(--color-bg-subtle)', padding: '96px 0', fontFamily: 'var(--font-sans)' }}>
+    <section id="contact" aria-labelledby="contact-heading" style={{ background: 'var(--color-bg-subtle)', padding: '96px 0' }}>
       <div
         ref={ref as React.RefObject<HTMLDivElement>}
         style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 2rem' }}

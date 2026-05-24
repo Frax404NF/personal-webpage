@@ -14,7 +14,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
-const SITE_URL = '..' //not deploy yet
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://portfolio-frandi.vercel.app'
 
 export const viewport: Viewport = {
   width: 'device-width',

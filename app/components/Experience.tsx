@@ -73,7 +73,7 @@ export default function Experience() {
   const { ref: listRef, inView: listInView } = useInView()
 
   return (
-    <section id="experience" aria-labelledby="experience-heading" style={{ background: 'var(--color-bg-subtle)', padding: '96px 0', fontFamily: 'var(--font-sans)' }}>
+    <section id="experience" aria-labelledby="experience-heading" style={{ background: 'var(--color-bg-subtle)', padding: '96px 0' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 2rem' }}>
 
         <div
