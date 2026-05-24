@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-export function useInView(options?: IntersectionObserverInit) {
+export function useInView() {
   const ref = useRef<HTMLElement>(null)
   const [inView, setInView] = useState(false)
 
@@ -17,7 +17,7 @@ export function useInView(options?: IntersectionObserverInit) {
           observer.unobserve(el)
         }
       },
-      { threshold: 0.12, rootMargin: '0px 0px -48px 0px', ...options }
+      { threshold: 0.12, rootMargin: '0px 0px -48px 0px' }
     )
 
     observer.observe(el)
