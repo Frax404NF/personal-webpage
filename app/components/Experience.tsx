@@ -4,6 +4,17 @@ import { useInView } from '../hooks/useInView'
 
 const experiences = [
   {
+    period: '2025 - Present',
+    company: 'Blue Bridge Corp',
+    role: 'Front End Developer',
+    note: 'Freelance, Remote',
+    bullets: [
+      'Shipped client-facing web apps (dashboards, company profiles, learning platforms) in React, Next.js, and TypeScript with Ant Design and Tailwind CSS.',
+      'Integrated frontend with backend APIs, handling auth, data fetching, and client-side routing across multiple projects.',
+    ],
+    links: [],
+  },
+  {
     period: '2024',
     company: 'Telkom Indonesia',
     role: 'Programming Intern',
@@ -34,7 +45,7 @@ const experiences = [
       'Graduated with distinction; recognized as one of the 1,000 most active students in ILT sessions.',
       'Led multiple study group sessions and implemented GCP best practices across capstone project.',
     ],
-    links: [{ label: 'Certificate', href: 'https://drive.google.com/file/d/1yK8pXNswXeWGqHos7xp81_6YxO3vwNyE/view?usp=sharing' }],
+    links: [{ label: 'Certificate', href: 'https://drive.google.com/file/d/1yK8pXNswXeWGqHos7xp81_6YxO3vwNyE/view?usp=sharing' }, { label: 'Highlights journey', href: 'https://www.linkedin.com/feed/update/urn:li:activity:7220382040213372928/' }],
   },
   {
     period: '2023',
@@ -45,7 +56,7 @@ const experiences = [
       'Built RESTful APIs integrating JIRA and Google Cloud using Django.',
       'Configured Docker Compose environments and managed collaboration via GitLab.',
     ],
-    links: [{ label: 'Company', href: 'https://mekar.id/' }],
+    links: [{ label: 'Company', href: 'https://mekar.id/' }, { label: 'Details', href: 'https://www.linkedin.com/in/frandi-andika/details/experience/' }],
   },
   {
     period: '2023',

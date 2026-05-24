@@ -31,6 +31,11 @@ const secondaryProjects = [
 
 const compactProjects = [
   {
+    name: 'User Directory Web Apps',
+    tags: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind v4', 'Jest'],
+    github: 'https://github.com/Frax404NF/mampu-tech',
+  },
+  {
     name: 'Employee Attendance System API',
     tags: ['Node.js', 'Express', 'Redis', 'MySQL', 'Bull Queue'],
     github: 'https://github.com/Frax404NF/attendance-system-api',
@@ -39,11 +44,6 @@ const compactProjects = [
     name: 'URL Analytics Platform',
     tags: ['Flask', 'Tailwind', 'MySQL'],
     link: 'https://www.linkedin.com/posts/frandi-andika_url-analytics-project-activity-7246383976804720640-BfCW',
-  },
-  {
-    name: 'React Jobs Platform',
-    tags: ['React', 'Tailwind', 'Vite'],
-    github: 'https://github.com/Frax404NF/React-Jobs',
   },
   {
     name: 'Bookshelf API',
@@ -164,9 +164,16 @@ export default function Work() {
                   </div>
                 </div>
                 {'github' in project && project.github ? (
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="link-muted row-icon" aria-label={`View ${project.name} on GitHub`} style={{ display: 'inline-flex', alignItems: 'center' }}>
-                    <ExternalIcon size={13} />
-                  </a>
+                  <div style={{ display: 'inline-flex', gap: '0.5rem', alignItems: 'center' }}>
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="link-muted row-icon" aria-label={`View ${project.name} on GitHub`} style={{ display: 'inline-flex', alignItems: 'center' }}>
+                      <ExternalIcon size={13} />
+                    </a>
+                    {'live' in project && (project as { live?: string }).live && (
+                      <a href={(project as { live?: string }).live} target="_blank" rel="noopener noreferrer" className="link-accent row-icon" aria-label={`Open ${project.name} live site`} style={{ display: 'inline-flex', alignItems: 'center' }}>
+                        <ExternalIcon size={13} />
+                      </a>
+                    )}
+                  </div>
                 ) : (
                   <a href={(project as { link?: string }).link} target="_blank" rel="noopener noreferrer" className="link-muted row-icon" aria-label={`View ${project.name}`} style={{ display: 'inline-flex', alignItems: 'center' }}>
                     <ExternalIcon size={13} />
