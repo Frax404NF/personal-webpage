@@ -14,7 +14,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://portfolio-frandi.vercel.app'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://frandiandika.dev'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -47,6 +47,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    google: '568e1420fc072dee',
+  },
 }
 
 export default function RootLayout({
@@ -54,8 +57,32 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Frandi Andika',
+    url: SITE_URL,
+    jobTitle: 'Software Engineer',
+    description: 'Full-stack software engineer building reliable web systems.',
+    sameAs: [
+      'https://github.com/Frax404NF',
+      'https://www.linkedin.com/in/frandi-andika-30a505260/',
+    ],
+    knowsAbout: ['React', 'Next.js', 'Node.js', 'TypeScript', 'Google Cloud', 'Python'],
+    alumniOf: {
+      '@type': 'CollegeOrUniversity',
+      name: 'Universitas Sam Ratulangi',
+    },
+  }
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+      </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable}`}>
         {children}
       </body>
