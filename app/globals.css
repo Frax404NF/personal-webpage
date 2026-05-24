@@ -319,9 +319,25 @@ body {
   color: var(--color-text-muted);
   text-decoration: none;
   transition: color 150ms var(--ease-out-quart);
+  position: relative;
 }
 .nav-link:hover {
   color: var(--color-accent);
+}
+
+.nav-link-active {
+  color: var(--color-text-primary);
+}
+
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--color-accent);
+  border-radius: 1px;
 }
 
 .nav-menu-btn {
@@ -493,4 +509,100 @@ body {
 }
 .contact-link:hover {
   color: var(--color-accent);
+}
+
+/* ─── Scroll-enter animations ────────────────────────────────────────────── */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(1.25rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-up {
+  opacity: 0;
+}
+.animate-fade-up.in-view {
+  animation: fade-up 500ms var(--ease-out-expo) both;
+}
+
+.animate-fade-in {
+  opacity: 0;
+}
+.animate-fade-in.in-view {
+  animation: fade-in 400ms var(--ease-out-expo) both;
+}
+
+/* Stagger delays for child elements */
+.stagger-1 { animation-delay: 60ms; }
+.stagger-2 { animation-delay: 120ms; }
+.stagger-3 { animation-delay: 180ms; }
+.stagger-4 { animation-delay: 240ms; }
+.stagger-5 { animation-delay: 300ms; }
+
+/* ─── Delight: tag hover ─────────────────────────────────────────────────── */
+
+.tag {
+  transition: transform 120ms var(--ease-out-quart), background-color 120ms var(--ease-out-quart);
+}
+.tag:hover {
+  transform: scale(1.06);
+  background-color: oklch(90% 0.06 250);
+}
+
+/* ─── Delight: project row icon nudge ────────────────────────────────────── */
+
+.project-row .row-icon {
+  transition: transform 150ms var(--ease-out-quart), color 150ms var(--ease-out-quart);
+}
+.project-row:hover .row-icon {
+  transform: translate(2px, -2px);
+  color: var(--color-accent);
+}
+
+/* ─── Delight: nav name underline draw ───────────────────────────────────── */
+
+.nav-name-link {
+  position: relative;
+}
+.nav-name-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 250ms var(--ease-out-expo);
+}
+.nav-name-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ─── Reduced motion: disable all scroll animations ─────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-in {
+    opacity: 1;
+    animation: none;
+  }
+  .tag:hover {
+    transform: none;
+  }
+  .project-row .row-icon {
+    transition: color 150ms var(--ease-out-quart);
+  }
+  .project-row:hover .row-icon {
+    transform: none;
+  }
+  .nav-name-link::after {
+    transition: none;
+  }
 }
