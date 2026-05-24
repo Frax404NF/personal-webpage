@@ -25,16 +25,12 @@ export default function Hero() {
       <div style={containerStyle}>
         <p
           className="hero-eyebrow"
-          aria-label="Indonesia · Software Engineer · Available for remote"
+          aria-label="Manado, Indonesia · Software Engineer · Available for remote"
         >
-          <span>Indonesia</span>
-          <span className="hero-eyebrow-sep" aria-hidden="true">
-            ·
-          </span>
+          <span>Manado, Indonesia</span>
+          <span className="hero-eyebrow-sep" aria-hidden="true">·</span>
           <span>Software Engineer</span>
-          <span className="hero-eyebrow-sep" aria-hidden="true">
-            ·
-          </span>
+          <span className="hero-eyebrow-sep" aria-hidden="true">·</span>
           <span>Available for remote</span>
         </p>
 

@@ -9,23 +9,21 @@ const links = [
   { label: 'Contact', href: '#contact', id: 'contact' },
 ]
 
-function useActiveSection(ids: string[]) {
+const SECTION_IDS = ['work', 'experience', 'about', 'contact'] as const
+
+function useActiveSection() {
   const [active, setActive] = useState<string | null>(null)
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = []
-
-    // Track intersection ratios per section
     const ratios: Record<string, number> = {}
 
-    ids.forEach(id => {
+    const observers = SECTION_IDS.map(id => {
       const el = document.getElementById(id)
-      if (!el) return
+      if (!el) return null
 
       const observer = new IntersectionObserver(
         ([entry]) => {
           ratios[id] = entry.intersectionRatio
-          // Set active to whichever section has the highest visible ratio
           const best = Object.entries(ratios).sort((a, b) => b[1] - a[1])[0]
           if (best && best[1] > 0) setActive(best[0])
           else setActive(null)
@@ -34,11 +32,11 @@ function useActiveSection(ids: string[]) {
       )
 
       observer.observe(el)
-      observers.push(observer)
+      return observer
     })
 
-    return () => observers.forEach(o => o.disconnect())
-  }, [ids])
+    return () => observers.forEach(o => o?.disconnect())
+  }, [])
 
   return active
 }
@@ -46,7 +44,7 @@ function useActiveSection(ids: string[]) {
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const activeSection = useActiveSection(links.map(l => l.id))
+  const activeSection = useActiveSection()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)

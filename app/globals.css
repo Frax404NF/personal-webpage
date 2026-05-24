@@ -93,6 +93,11 @@ body {
   border-radius: 3px;
   line-height: 1.5;
   white-space: nowrap;
+  transition: transform 120ms var(--ease-out-quart), background-color 120ms var(--ease-out-quart);
+}
+.tag:hover {
+  transform: scale(1.06);
+  background-color: oklch(90% 0.06 250);
 }
 
 .link-accent {
@@ -279,6 +284,16 @@ body {
   }
 }
 
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-name-block {
+    font-size: clamp(1.5rem, 1rem + 4vw, 2.5rem);
+    letter-spacing: -0.015em;
+  }
+  .hero-below {
+    padding-top: 1rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-char,
   .hero-eyebrow,
@@ -307,9 +322,25 @@ body {
   text-decoration: none;
   letter-spacing: -0.01em;
   transition: color 150ms var(--ease-out-quart);
+  position: relative;
 }
 .nav-name-link:hover {
   color: var(--color-accent);
+}
+.nav-name-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 250ms var(--ease-out-expo);
+}
+.nav-name-link:hover::after {
+  transform: scaleX(1);
 }
 
 .nav-link {
@@ -544,16 +575,6 @@ body {
 .stagger-4 { animation-delay: 240ms; }
 .stagger-5 { animation-delay: 300ms; }
 
-/* ─── Delight: tag hover ─────────────────────────────────────────────────── */
-
-.tag {
-  transition: transform 120ms var(--ease-out-quart), background-color 120ms var(--ease-out-quart);
-}
-.tag:hover {
-  transform: scale(1.06);
-  background-color: oklch(90% 0.06 250);
-}
-
 /* ─── Delight: project row icon nudge ────────────────────────────────────── */
 
 .project-row .row-icon {
@@ -562,27 +583,6 @@ body {
 .project-row:hover .row-icon {
   transform: translate(2px, -2px);
   color: var(--color-accent);
-}
-
-/* ─── Delight: nav name underline draw ───────────────────────────────────── */
-
-.nav-name-link {
-  position: relative;
-}
-.nav-name-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 250ms var(--ease-out-expo);
-}
-.nav-name-link:hover::after {
-  transform: scaleX(1);
 }
 
 /* ─── Reduced motion: disable all scroll animations ─────────────────────── */
