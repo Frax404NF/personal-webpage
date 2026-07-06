@@ -1,6 +1,8 @@
 'use client'
 
+import { useRef } from 'react'
 import { useInView } from '../hooks/useInView'
+import { ExternalLink as ExternalIcon } from 'lucide-react'
 
 const experiences = [
   {
@@ -70,11 +72,63 @@ const experiences = [
   },
 ]
 
-function ExternalIcon() {
+type ExperienceType = {
+  period: string
+  company: string
+  role: string
+  note?: string
+  bullets: string[]
+  links: { label: string; href: string }[]
+}
+
+function ExperienceRow({ exp, showYear, delay, listInView }: { exp: ExperienceType, showYear: boolean, delay: number, listInView: boolean }) {
+  const rowRef = useRef<HTMLDivElement>(null)
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!rowRef.current) return
+    const rect = rowRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    rowRef.current.style.setProperty('--mouse-x', `${x}px`)
+    rowRef.current.style.setProperty('--mouse-y', `${y}px`)
+  }
+
   return (
-    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-      <path d="M2.5 11.5L11.5 2.5M11.5 2.5H6M11.5 2.5V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <div
+      ref={rowRef}
+      onMouseMove={handleMouseMove}
+      className={`exp-row animate-fade-up${listInView ? ' in-view' : ''}`}
+      style={{ animationDelay: `${delay}ms` }}
+    >
+      <div className="exp-year" aria-hidden={!showYear}>
+        {showYear ? exp.period : ''}
+      </div>
+
+      <div className="exp-content">
+        <div className="exp-header">
+          <span className="exp-company">{exp.company}</span>
+          <span className="exp-role">{exp.role}</span>
+        </div>
+
+        {exp.note && <p className="exp-note">{exp.note}</p>}
+
+        <ul className="exp-bullets">
+          {exp.bullets.map((bullet: string, j: number) => (
+            <li key={j} className="exp-bullet">{bullet}</li>
+          ))}
+        </ul>
+
+        {exp.links.length > 0 && (
+          <div className="exp-links-wrapper">
+            {exp.links.map((link: {label: string, href: string}) => (
+              <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="link-accent exp-link">
+                {link.label} <ExternalIcon size={14} />
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   )
 }
 
@@ -84,8 +138,8 @@ export default function Experience() {
   const { ref: listRef, inView: listInView } = useInView()
 
   return (
-    <section id="experience" aria-labelledby="experience-heading" style={{ background: 'var(--color-bg-subtle)', padding: '96px 0' }}>
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 2rem' }}>
+    <section id="experience" aria-labelledby="experience-heading" className="section-wrapper" style={{ background: 'var(--color-bg-subtle)' }}>
+      <div className="container-bounds">
 
         <div
           ref={headingRef as React.RefObject<HTMLDivElement>}
@@ -98,7 +152,7 @@ export default function Experience() {
 
         <div
           ref={listRef as React.RefObject<HTMLDivElement>}
-          style={{ display: 'flex', flexDirection: 'column' }}
+          className="exp-list-wrapper"
         >
           {experiences.map((exp, i) => {
             const showYear = !seenYears.has(exp.period)
@@ -106,40 +160,13 @@ export default function Experience() {
             const delay = Math.min(i, 4) * 60
 
             return (
-              <div
-                key={i}
-                className={`exp-row animate-fade-up${listInView ? ' in-view' : ''}`}
-                style={{ animationDelay: `${delay}ms` }}
-              >
-                <div className="exp-year" aria-hidden={!showYear}>
-                  {showYear ? exp.period : ''}
-                </div>
-
-                <div>
-                  <div className="exp-header">
-                    <span className="exp-company">{exp.company}</span>
-                    <span className="exp-role">{exp.role}</span>
-                  </div>
-
-                  {exp.note && <p className="exp-note">{exp.note}</p>}
-
-                  <ul className="exp-bullets">
-                    {exp.bullets.map((bullet, j) => (
-                      <li key={j} className="exp-bullet">{bullet}</li>
-                    ))}
-                  </ul>
-
-                  {exp.links.length > 0 && (
-                    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                      {exp.links.map(link => (
-                        <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="link-accent exp-link">
-                          {link.label} <ExternalIcon />
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
+              <ExperienceRow 
+                key={i} 
+                exp={exp} 
+                showYear={showYear} 
+                delay={delay} 
+                listInView={listInView} 
+              />
             )
           })}
         </div>

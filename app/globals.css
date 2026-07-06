@@ -575,15 +575,37 @@ body {
 }
 
 .exp-row {
+  position: relative;
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: 2rem;
   padding: 1.25rem 0.75rem;
-  border-radius: 4px;
+  border-radius: 12px;
   transition: background-color 150ms var(--ease-out-quart);
 }
-.exp-row:hover {
-  background-color: var(--color-accent-subtle);
+
+.exp-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    var(--color-accent-subtle),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 500ms;
+  pointer-events: none;
+  z-index: 0;
+}
+.exp-row:hover::before {
+  opacity: 1;
+}
+
+.exp-year, .exp-content {
+  position: relative;
+  z-index: 1;
 }
 
 .exp-year {
@@ -634,6 +656,17 @@ body {
   font-size: var(--text-sm);
   color: var(--color-text-body);
   line-height: 1.6;
+}
+
+.exp-links-wrapper {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.exp-list-wrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .exp-link {
