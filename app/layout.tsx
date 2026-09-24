@@ -24,15 +24,15 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Frandi Andika — Software Engineer',
+  title: 'Frandi Andika — Full-Stack Engineer',
   description:
-    'Full-stack software engineer building reliable web systems. CS graduate, Bangkit Academy top 10%.',
+    'Full-stack engineer building reliable web systems. CS graduate, Bangkit Academy top 10%.',
   alternates: {
     canonical: SITE_URL,
   },
   openGraph: {
-    title: 'Frandi Andika — Software Engineer',
-    description: 'Full-stack software engineer building reliable web systems.',
+    title: 'Frandi Andika — Full-Stack Engineer',
+    description: 'Full-stack engineer building reliable web systems.',
     url: SITE_URL,
     siteName: 'Frandi Andika',
     type: 'website',
@@ -40,8 +40,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'Frandi Andika — Software Engineer',
-    description: 'Full-stack software engineer building reliable web systems.',
+    title: 'Frandi Andika — Full-Stack Engineer',
+    description: 'Full-stack engineer building reliable web systems.',
   },
   robots: {
     index: true,
@@ -62,8 +62,14 @@ export default function RootLayout({
     '@type': 'Person',
     name: 'Frandi Andika',
     url: SITE_URL,
-    jobTitle: 'Software Engineer',
-    description: 'Full-stack software engineer building reliable web systems.',
+    jobTitle: 'Full-Stack Engineer',
+    description: 'Full-stack engineer building reliable web systems.',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Tangerang',
+      addressRegion: 'Banten',
+      addressCountry: 'Indonesia',
+    },
     sameAs: [
       'https://github.com/Frax404NF',
       'https://www.linkedin.com/in/frandi-andika-30a505260/',
