@@ -1,3 +1,5 @@
+import HeroCanvas from './HeroCanvas'
+
 const NAME = 'Frandi Andika'
 const nameChars = NAME.split('')
 
@@ -6,6 +8,8 @@ const containerStyle = {
   width: '100%',
   margin: '0 auto',
   padding: '0 clamp(1.25rem, 5vw, 4rem)',
+  position: 'relative',
+  zIndex: 1,
 } as const
 
 export default function Hero() {
@@ -13,6 +17,7 @@ export default function Hero() {
     <section
       aria-label="Introduction"
       style={{
+        position: 'relative',
         minHeight: '100svh',
         display: 'flex',
         flexDirection: 'column',
@@ -22,16 +27,17 @@ export default function Hero() {
         overflow: 'hidden',
       }}
     >
+      <HeroCanvas />
       <div style={containerStyle}>
         <p
           className="hero-eyebrow"
-          aria-label="Tangerang, Indonesia · Full-Stack Engineer · Available for remote"
+          aria-label="Tangerang, Indonesia · Full-Stack Engineer · Open to full-time & freelance"
         >
           <span>Tangerang, Indonesia</span>
           <span className="hero-eyebrow-sep" aria-hidden="true">·</span>
           <span>Full-Stack Engineer</span>
           <span className="hero-eyebrow-sep" aria-hidden="true">·</span>
-          <span>Available for remote</span>
+          <span>Open to full-time & freelance</span>
         </p>
 
         <h1
