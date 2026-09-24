@@ -19,7 +19,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://frandiandika.dev'
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#f7f5f2',
+  themeColor: '#fafbfc',
 }
 
 export const metadata: Metadata = {
