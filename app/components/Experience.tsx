@@ -6,6 +6,17 @@ import { ExternalLink as ExternalIcon } from 'lucide-react'
 
 const experiences = [
   {
+    period: 'Aug 2026 - Present',
+    company: 'PT Global Loyalty Indonesia (Alfagift)',
+    role: 'Full-Stack Developer Intern',
+    note: 'Tangerang, Indonesia',
+    bullets: [
+      'Developing full-stack features and API services supporting the Alfagift retail & loyalty ecosystem.',
+      'Building internal web applications and database queries using Python, PostgreSQL, and Vue.js.',
+    ],
+    links: [{ label: 'Company', href: 'https://gli.id/' }],
+  },
+  {
     period: '2025 - Present',
     company: 'Blue Bridge Corp',
     role: 'Front End Developer',
