@@ -30,7 +30,6 @@ export default function About() {
           className={`animate-fade-up${headingInView ? ' in-view' : ''}`}
           style={{ marginBottom: '3.5rem' }}
         >
-          <span className="section-label">About</span>
           <h2 id="about-heading" className="section-heading">Background</h2>
         </div>
 

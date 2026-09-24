@@ -41,8 +41,7 @@ export default function Contact() {
         ref={ref as React.RefObject<HTMLDivElement>}
         style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 2rem' }}
       >
-        <span className={`section-label animate-fade-up${inView ? ' in-view' : ''}`}>Contact</span>
-
+        
         <h2
           id="contact-heading"
           className={`animate-fade-up${inView ? ' in-view' : ''}`}

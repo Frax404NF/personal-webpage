@@ -81,7 +81,7 @@ type ExperienceType = {
   links: { label: string; href: string }[]
 }
 
-function ExperienceRow({ exp, showYear, delay, listInView }: { exp: ExperienceType, showYear: boolean, delay: number, listInView: boolean }) {
+function ExperienceRow({ exp, delay, listInView }: { exp: ExperienceType; delay: number; listInView: boolean }) {
   const rowRef = useRef<HTMLDivElement>(null)
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -100,8 +100,8 @@ function ExperienceRow({ exp, showYear, delay, listInView }: { exp: ExperienceTy
       className={`exp-row animate-fade-up${listInView ? ' in-view' : ''}`}
       style={{ animationDelay: `${delay}ms` }}
     >
-      <div className="exp-year" aria-hidden={!showYear}>
-        {showYear ? exp.period : ''}
+      <div className="exp-year">
+        {exp.period}
       </div>
 
       <div className="exp-content">
@@ -120,9 +120,9 @@ function ExperienceRow({ exp, showYear, delay, listInView }: { exp: ExperienceTy
 
         {exp.links.length > 0 && (
           <div className="exp-links-wrapper">
-            {exp.links.map((link: {label: string, href: string}) => (
+            {exp.links.map((link: { label: string; href: string }) => (
               <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="link-accent exp-link">
-                {link.label} <ExternalIcon size={14} />
+                {link.label} <ExternalIcon size={14} aria-hidden="true" />
               </a>
             ))}
           </div>
@@ -133,7 +133,6 @@ function ExperienceRow({ exp, showYear, delay, listInView }: { exp: ExperienceTy
 }
 
 export default function Experience() {
-  const seenYears = new Set<string>()
   const { ref: headingRef, inView: headingInView } = useInView()
   const { ref: listRef, inView: listInView } = useInView()
 
@@ -146,7 +145,6 @@ export default function Experience() {
           className={`animate-fade-up${headingInView ? ' in-view' : ''}`}
           style={{ marginBottom: '3.5rem' }}
         >
-          <span className="section-label">Experience</span>
           <h2 id="experience-heading" className="section-heading">Where I&apos;ve worked</h2>
         </div>
 
@@ -155,15 +153,12 @@ export default function Experience() {
           className="exp-list-wrapper"
         >
           {experiences.map((exp, i) => {
-            const showYear = !seenYears.has(exp.period)
-            seenYears.add(exp.period)
             const delay = Math.min(i, 4) * 60
 
             return (
               <ExperienceRow 
                 key={i} 
                 exp={exp} 
-                showYear={showYear} 
                 delay={delay} 
                 listInView={listInView} 
               />
