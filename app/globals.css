@@ -11,6 +11,7 @@
   --color-accent: oklch(42% 0.14 250);
   --color-accent-hover: oklch(35% 0.16 250);
   --color-accent-subtle: oklch(94% 0.04 250);
+  --color-status-online: oklch(65% 0.17 150);
 
   --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
   --text-sm: clamp(0.875rem, 0.82rem + 0.28vw, 0.9375rem);
@@ -314,9 +315,9 @@ body {
 /* ─── Nav ────────────────────────────────────────────────────────────────── */
 
 .nav-scrolled {
-  background-color: oklch(98% 0.006 60 / 0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background-color: oklch(99% 0.002 250 / 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -920,6 +921,99 @@ body {
 
 .work-editorial-grid:hover .project-image-wrapper {
   border-color: var(--color-accent);
+}
+
+/* ─── Status Pill ────────────────────────────────────────────────────────── */
+
+.status-pill {
+  position: fixed;
+  bottom: clamp(1rem, 2.5vw, 1.5rem);
+  left: clamp(1rem, 2.5vw, 1.5rem);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  background: oklch(99% 0.002 250 / 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-body);
+  cursor: default;
+  user-select: none;
+  transition:
+    border-color 180ms var(--ease-out-quart),
+    background-color 180ms var(--ease-out-quart);
+}
+
+.status-pill:hover {
+  border-color: var(--color-accent);
+  background-color: var(--color-bg);
+}
+
+.status-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: var(--color-status-online);
+  flex-shrink: 0;
+  animation: status-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes status-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+}
+
+.status-pill-location {
+  font-weight: 500;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.status-pill-sep {
+  color: var(--color-border);
+}
+
+.status-pill-time {
+  font-weight: 600;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.status-pill-extra {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  transition:
+    max-width 280ms var(--ease-out-expo),
+    opacity 200ms var(--ease-out-quart),
+    padding-left 200ms var(--ease-out-quart);
+}
+
+.status-pill:hover .status-pill-extra {
+  max-width: 280px;
+  opacity: 1;
+  padding-left: 0.25rem;
+}
+
+@media (max-width: 640px) {
+  .status-pill-extra {
+    display: none;
+  }
 }
 
 /* ─── Reduced motion: disable all scroll animations ─────────────────────── */

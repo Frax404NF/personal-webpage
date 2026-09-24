@@ -5,6 +5,7 @@ import Experience from './components/Experience'
 import About from './components/About'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import StatusPill from './components/StatusPill'
 
 export default function Page() {
   return (
@@ -18,6 +19,7 @@ export default function Page() {
         <Contact />
       </main>
       <Footer />
+      <StatusPill />
     </>
   )
 }
