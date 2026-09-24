@@ -44,41 +44,55 @@ const majorProjects: MajorProject[] = [
   }
 ]
 
-const compactProjects = [
+type CompactProject = {
+  name: string
+  year: string
+  description: string
+  tags: string[]
+  href: string
+  linkText: string
+}
+
+const compactProjects: CompactProject[] = [
   {
-    name: 'User Directory Web Apps',
-    image: '/user-directory.png',
-    description: 'A comprehensive user management interface built with Next.js 15, featuring robust type safety and comprehensive Jest testing.',
-    tags: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind v4', 'Jest'],
-    github: 'https://github.com/Frax404NF/mampu-tech',
+    name: 'User Directory Web App',
+    year: '2024',
+    description: 'User management interface with type safety & Jest tests',
+    tags: ['Next.js 15', 'TypeScript', 'Jest'],
+    href: 'https://github.com/Frax404NF/mampu-tech',
+    linkText: 'GitHub',
   },
   {
-    name: 'Employee Attendance System API',
-    image: '/back-end-pic.jpg',
-    description: 'A highly concurrent backend service managing employee clock-ins, utilizing Redis caching and Bull queues for asynchronous task processing.',
-    tags: ['Node.js', 'Express', 'Redis', 'MySQL', 'Bull Queue'],
-    github: 'https://github.com/Frax404NF/attendance-system-api',
+    name: 'Employee Attendance API',
+    year: '2024',
+    description: 'High-concurrency clock-in service with Bull Queue & Redis',
+    tags: ['Node.js', 'Express', 'Redis', 'Bull'],
+    href: 'https://github.com/Frax404NF/attendance-system-api',
+    linkText: 'GitHub',
   },
   {
     name: 'URL Analytics Platform',
-    image: '/url-analytics.png',
-    description: 'A full-stack analytics tool tracking link engagement metrics, built with Flask and styled with Tailwind CSS.',
+    year: '2024',
+    description: 'Engagement metrics and click analytics dashboard',
     tags: ['Flask', 'Tailwind', 'MySQL'],
-    link: 'https://www.linkedin.com/posts/frandi-andika_url-analytics-project-activity-7246383976804720640-BfCW',
+    href: 'https://www.linkedin.com/posts/frandi-andika_url-analytics-project-activity-7246383976804720640-BfCW',
+    linkText: 'View',
   },
   {
     name: 'Bookshelf API',
-    image: '/back-end-pic.jpg',
-    description: 'A RESTful service for book inventory management, built with core Node.js principles and vanilla JavaScript.',
-    tags: ['Node.js', 'JavaScript', 'REST API'],
-    github: 'https://github.com/Frax404NF/Bookshelf-API-Fixed',
+    year: '2023',
+    description: 'RESTful book inventory management service',
+    tags: ['Node.js', 'JavaScript', 'REST'],
+    href: 'https://github.com/Frax404NF/Bookshelf-API-Fixed',
+    linkText: 'GitHub',
   },
   {
     name: 'Bakoding Website',
-    image: '/bakoding.png',
-    description: 'A fundamental web development project demonstrating semantic HTML5, modern CSS3 styling, and interactive JavaScript.',
+    year: '2023',
+    description: 'Semantic web application demonstrating core DOM & CSS3',
     tags: ['HTML5', 'CSS3', 'JavaScript'],
-    github: 'https://github.com/Frax404NF/Belajar-Dasar-Pemrograman-Web-Submission',
+    href: 'https://github.com/Frax404NF/Belajar-Dasar-Pemrograman-Web-Submission',
+    linkText: 'GitHub',
   },
 ]
 
@@ -90,7 +104,7 @@ function Tags({ items }: { items: string[] }) {
   )
 }
 
-function MajorProjectRow({ project, index }: { project: MajorProject, index: number }) {
+function MajorProjectRow({ project, index }: { project: MajorProject; index: number }) {
   const { ref, inView } = useInView()
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
@@ -103,11 +117,10 @@ function MajorProjectRow({ project, index }: { project: MajorProject, index: num
     const y = e.clientY - rect.top
     const centerX = rect.width / 2
     const centerY = rect.height / 2
-    
-    // Max rotation is 12 degrees
+
     const rotateX = ((y - centerY) / centerY) * -12
     const rotateY = ((x - centerX) / centerX) * 12
-    
+
     setTilt({ x: rotateX, y: rotateY })
   }
 
@@ -123,7 +136,7 @@ function MajorProjectRow({ project, index }: { project: MajorProject, index: num
       className={`work-editorial-grid animate-reveal${inView ? ' in-view' : ''} ${index % 2 !== 0 ? 'reverse-layout' : ''}`}
       style={{ animationDelay: `${index * 100}ms` }}
     >
-      <div 
+      <div
         className="editorial-image"
         ref={imageRef}
         onMouseMove={handleMouseMove}
@@ -131,14 +144,20 @@ function MajorProjectRow({ project, index }: { project: MajorProject, index: num
         onMouseLeave={handleMouseLeave}
         style={{ perspective: '1200px' }}
       >
-        <div 
+        <div
           className="project-image-wrapper"
-          style={{ 
+          style={{
             transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-            transition: isHovering ? 'transform 100ms ease-out' : 'transform 500ms ease-out'
+            transition: isHovering ? 'transform 100ms ease-out' : 'transform 500ms ease-out',
           }}
         >
-          <Image src={project.image} alt={`${project.name} preview`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
+          <Image
+            src={project.image}
+            alt={`${project.name} preview`}
+            fill
+            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
         </div>
       </div>
       <div className="editorial-content">
@@ -153,44 +172,59 @@ function MajorProjectRow({ project, index }: { project: MajorProject, index: num
         </p>
         <Tags items={project.tags} />
         <div className="project-links">
-          {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer" className="link-accent work-link">GitHub <ExternalIcon /></a>}
-          {project.docs && <a href={project.docs} target="_blank" rel="noopener noreferrer" className="link-muted work-link">Docs <ExternalIcon /></a>}
-          {project.link && <a href={project.link} target="_blank" rel="noopener noreferrer" className="link-accent work-link">View <ExternalIcon /></a>}
+          {project.github && (
+            <a href={project.github} target="_blank" rel="noopener noreferrer" className="link-accent work-link">
+              GitHub <ExternalIcon size={14} aria-hidden="true" />
+            </a>
+          )}
+          {project.docs && (
+            <a href={project.docs} target="_blank" rel="noopener noreferrer" className="link-muted work-link">
+              Docs <ExternalIcon size={14} aria-hidden="true" />
+            </a>
+          )}
+          {project.link && (
+            <a href={project.link} target="_blank" rel="noopener noreferrer" className="link-accent work-link">
+              View <ExternalIcon size={14} aria-hidden="true" />
+            </a>
+          )}
         </div>
       </div>
     </div>
   )
 }
 
-function MinorProjectRow({ project, index }: { project: MajorProject, index: number }) {
+function CompactProjectRow({ project, index }: { project: CompactProject; index: number }) {
   const { ref, inView } = useInView()
   return (
     <div
       ref={ref as React.RefObject<HTMLDivElement>}
-      className={`work-minor-grid animate-fade-up${inView ? ' in-view' : ''} stagger-${Math.min(index + 1, 5)}`}
+      className={`project-index-row animate-fade-up${inView ? ' in-view' : ''}`}
+      style={{ animationDelay: `${index * 50}ms` }}
     >
-      <div style={{ position: 'relative', aspectRatio: '16/9', width: '100%' }}>
-        <div className="project-image-wrapper">
-          <Image src={project.image} alt={`${project.name} preview`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 30vw" />
+      <div className="project-index-main">
+        <span className="project-index-year">{project.year}</span>
+        <div className="project-index-info">
+          <span className="project-index-name">{project.name}</span>
+          <span className="project-index-desc">{project.description}</span>
         </div>
       </div>
-      <div className="project-info-stack">
-        <div className="project-header minor">
-          <h3 className="project-title title-minor">
-            {project.name}
-          </h3>
-          <Tags items={project.tags} />
+
+      <div className="project-index-meta">
+        <div className="project-index-tags">
+          {project.tags.map(tag => (
+            <span key={tag} className="tag tag-compact">{tag}</span>
+          ))}
         </div>
-        <p className="project-desc desc-minor">
-          {project.description}
-        </p>
-        <div className="project-links minor">
-          {'github' in project && project.github ? (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className="link-accent work-link">GitHub <ExternalIcon /></a>
-          ) : (
-            <a href={(project as { link?: string }).link} target="_blank" rel="noopener noreferrer" className="link-accent work-link">View <ExternalIcon /></a>
-          )}
-        </div>
+
+        <a
+          href={project.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link-accent project-index-link"
+        >
+          <span>{project.linkText}</span>
+          <ExternalIcon size={13} className="project-index-icon" aria-hidden="true" />
+        </a>
       </div>
     </div>
   )
@@ -209,7 +243,6 @@ export default function Work() {
           className={`animate-fade-up${headingInView ? ' in-view' : ''}`}
           style={{ marginBottom: '4rem' }}
         >
-          <span className="section-label">Work</span>
           <h2 id="work-heading" className="section-heading">Selected projects</h2>
         </div>
 
@@ -221,18 +254,24 @@ export default function Work() {
 
         <div
           ref={compactRef as React.RefObject<HTMLDivElement>}
-          style={{ paddingTop: '2rem' }}
+          style={{ paddingTop: '2.5rem' }}
         >
           <div className="work-minor-header">
             <h2 className="section-heading">More projects</h2>
-            <a href="https://github.com/Frax404NF" target="_blank" rel="noopener noreferrer" className="link-muted work-link" style={{ fontSize: 'var(--text-base)' }}>
-              View GitHub archive <ExternalIcon />
+            <a
+              href="https://github.com/Frax404NF"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-muted work-link"
+              style={{ fontSize: 'var(--text-base)' }}
+            >
+              View GitHub archive <ExternalIcon size={14} aria-hidden="true" />
             </a>
           </div>
 
-          <div>
+          <div className="project-index-table">
             {compactProjects.map((project, i) => (
-              <MinorProjectRow key={project.name} project={project} index={i} />
+              <CompactProjectRow key={project.name} project={project} index={i} />
             ))}
           </div>
         </div>
