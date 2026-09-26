@@ -11,8 +11,8 @@ const experiences = [
     role: 'Full-Stack Developer Intern',
     note: 'Tangerang, Indonesia',
     bullets: [
-      'Developing full-stack features and API services supporting the Alfagift retail & loyalty ecosystem.',
-      'Building internal web applications and database queries using Python, PostgreSQL, and Vue.js.',
+      'Developing full-stack features and API services supporting the Alfagift ecosystem.',
+      'Building internal web applications using Python, PostgreSQL, and Vue.js.',
     ],
     links: [{ label: 'Company', href: 'https://gli.id/' }],
   },
